@@ -60,6 +60,7 @@ export default class ScrollPicker extends Component {
         let wrapperStyle = {
             height:this.wrapperHeight,
             flex:1,
+            width: highlightWidth,
             backgroundColor:this.props.backgroundColor,
             overflow:'hidden',
         };
@@ -104,14 +105,14 @@ export default class ScrollPicker extends Component {
 
     _renderItem(data, index){
         let isSelected = index === this.state.selectedIndex;
-        let item = <Text style={isSelected ? [styles.itemText, styles.itemTextSelected] : styles.itemText}>{data}</Text>;
+        let item = <Text style={isSelected ? [styles.itemText, styles.itemTextSelected, {color: 'transparent',backgroundColor: 'transparent'}] : [styles.itemText,{backgroundColor: 'transparent'}]}>{data}</Text>;
 
         if(this.props.renderItem){
             item = this.props.renderItem(data, index, isSelected);
         }
 
         return (
-            <View style={[styles.itemWrapper, {height:this.itemHeight}]} key={index}>
+            <View style={[styles.itemWrapper, {height:this.itemHeight},{backgroundColor: 'transparent', width: this.props.style.width}]} key={index}>
                 {item}
             </View>
         );
